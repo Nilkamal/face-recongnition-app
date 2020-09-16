@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, lazy, Suspense } from 'react';
 import './App.css';//for font family and background
 import Clarifai from 'clarifai';
 import Navigation from './components/navigation/Navigation';
@@ -6,7 +6,7 @@ import Logo from './components/logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import Particles from 'react-particles-js';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+const FaceRecognition = lazy(() => import('./components/FaceRecognition/FaceRecognition'));
 
 const app = new Clarifai.App({
   apiKey: '9f61eaa3458f43429dc92059903b2bdf'
@@ -63,8 +63,9 @@ class App extends Component {
           <Logo />
           <Rank />
           <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
-        
-          <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+          <Suspense fallback={<p>Loading...</p>}>
+            <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl}/>
+          </Suspense>
       </div>
     );
   }

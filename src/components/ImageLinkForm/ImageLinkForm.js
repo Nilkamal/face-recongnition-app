@@ -11,11 +11,13 @@ const ImageLinkForm = ( {onInputChange, onButtonSubmit} ) => {
                 <div className='form center pa4 br3 shadow-3'>
                     <input 
                         type='text' 
+                        aria-label="Image Url"
                         className='f4 pa2 w-70 center glow' 
                         onChange={onInputChange}
                     />
                     <button 
-                        className='w-30 grow link pointer f4 white bg-light-purple'
+                        className='w-30 grow link pointer f4 white bg-light-purple fw5'
+                        style={{backgroundColor: '#6B0FDB'}}
                         onClick={onButtonSubmit}
                     >
                     Detect
